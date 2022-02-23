@@ -10,7 +10,7 @@ on:
 jobs:
   rectify-backstage-packages:
     runs-on: ubuntu-latest
-    if:  ${{github.event.label.name == 'backstage-bump' (github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]' || github.actor == 'mhaley37')}}
+    if:  ${{(github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]' || github.actor == 'mhaley37')}}
     steps:       
       - uses: actions/checkout@v2
         with:
@@ -24,3 +24,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add . && git commit -m "Updated dependencies from backstage-cli versions:bump" && git push
+      - uses: gr2m/create-or-update-pull-request-action@v1
+        with: 
+          title: Updated dependencies from backstage-cli versions:bump
+          update-pull-request-title-and-body: true
