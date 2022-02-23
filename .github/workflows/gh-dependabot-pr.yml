@@ -10,13 +10,13 @@ on:
 jobs:
   rectify-backstage-packages:
     runs-on: ubuntu-latest
-    if:  ${{ contains(github.event.pull_request.labels.*.name), 'backstage-bump') && (github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]' || github.actor == 'mhaley37')}}
+    if:  ${{ contains(github.event.pull_request.labels.*.name, 'backstage-bump') && (github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]' || github.actor == 'mhaley37')}}
     steps:       
       - uses: actions/checkout@v2
         with:
           ref: ${{github.head_ref}}
       - uses: actions/setup-node@v2
-        with: 
+        with:   
           node-version: '16'
       - run: npx yarn install
       - id: backstage-bump
