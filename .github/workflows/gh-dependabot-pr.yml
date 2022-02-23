@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
     steps:       
-      - uses: actions/checkout@2
+      - uses: actions/checkout@V2
       - uses: actions/setup-node@v2
         with: 
           node-version: '16'
