@@ -21,11 +21,11 @@ jobs:
       - name: bump backstage package versions
         run: npx backstage-cli versions:bump
       - name: update pull request
-        uses: kt3k/update-pr-description@v1.1.0
+        uses: tzkhan/pr-update-action@v2
         with:
-          github_token: ${{secrets.GITHUB_TOKEN}}
-          pr_title: Updated dependencies from backstage-cli versions:bump
-          destination_branch: main
+          repo_token: ${{secrets.GITHUB_TOKEN}}
+          head-branch-regex: ${{github.head_ref}}
+          title-template: 'NEw tiTLE!'
       - name: Commit changes and push
         run: |
           git config user.name github-actions
