@@ -19,18 +19,15 @@ jobs:
         with:   
           node-version: '16'
       - run: npx yarn install
-      - id: backstage-bump
+      - name: bump backstage package versions
         run: npx backstage-cli versions:bump
-
-      - id: commit-and-push
-        name: Commit changes and push
+      - name: update-pull-request
+        uses: kt3k/update-pr-description@v1.1.0
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          pr_title: Updated dependencies from backstage-cli versions:bump
+      - name: Commit changes and push
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add . && git commit -m "Updated dependencies from backstage-cli versions:bump" && git push
-      - uses: gr2m/create-or-update-pull-request-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with: 
-          title: Updated dependencies from backstage-cli versions:bump
-          update-pull-request-title-and-body: true
