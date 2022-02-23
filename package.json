@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@backstage/plugin-api-docs": "^0.0.1",
-    "@backstage/plugin-techdocs": "^0.0.1",
+    "@backstage/plugin-techdocs": "^0.13.4",
     "@backstage/plugin-catalog-graph": "^0.0.1",
     "@backstage/plugin-catalog": "^0.0.1",
     "@backstage/plugin-catalog-common": "^0.0.1",
