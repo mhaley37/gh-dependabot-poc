@@ -7,8 +7,16 @@ on:
 jobs:
   auto-approve:
     runs-on: ubuntu-latest
-    steps:
-    - uses: superbrothers/close-pull-request@v3
-      if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
-      with:
-        comment: "Dependabot pull requests are auto-closed"
+    if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
+    steps:       
+      - uses: actions/checkout@2
+      - uses: actions/setup-node@v2
+        with: 
+          node-version: '16'
+      - run: npm install -g yarn
+      - run: yarn global add backstage-cli
+      - run: backstage-cli versions-bump
+      - uses: superbrothers/close-pull-request@v3
+        with:
+          comment: "Dependabot pull requests are auto-closed"
+    
