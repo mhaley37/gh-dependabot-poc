@@ -11,7 +11,7 @@
   "dependencies": {
     "@backstage/plugin-techdocs": "^0.0.1",
     "@backstage/plugin-catalog-graph": "^0.0.1",
-    "@backstage/plugin-catalog": "^0.0.1"
+    "@backstage/plugin-catalog": "^0.8.0"
   },
   "devDependencies": {
     "@backstage/cli": "^0.5.1",
