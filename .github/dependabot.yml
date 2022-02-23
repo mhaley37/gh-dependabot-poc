@@ -8,9 +8,10 @@ updates:
     labels:
       - "dependabot-auto"
       - "temp"
+      - "backstage-bump"
     schedule:
       interval: "daily"
     allow:
       - dependency-name: "@backstage/*"
-    open-pull-requests-limit: 15
+    open-pull-requests-limit: 1
     
