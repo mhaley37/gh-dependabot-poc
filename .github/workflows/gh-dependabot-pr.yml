@@ -18,7 +18,7 @@ jobs:
           node-version: '16'
       - run: npm install -g yarn
       - run: yarn global add backstage-cli
-      - run: backstage-cli versions-bump
+      - run: yarn backstage-cli versions-bump
       - uses: superbrothers/close-pull-request@v3
         with:
           comment: "Dependabot pull requests are auto-closed"
