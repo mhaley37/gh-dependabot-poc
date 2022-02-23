@@ -19,10 +19,10 @@ jobs:
         with: 
           node-version: '16'
       - run: npx yarn install
-      - id:
+      - id: backstage-bump
         run: npx backstage-cli versions:bump
 
-      - id: commit_and_push
+      - id: commit-and-push
         name: Commit changes and push
         run: |
           git config user.name github-actions
