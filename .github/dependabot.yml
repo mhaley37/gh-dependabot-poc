@@ -1,0 +1,16 @@
+
+version: 2
+
+updates:
+  # Configuration for npm
+  - package-ecosystem: "npm"
+    directory: "/"
+    labels:
+      - "dependabot-auto"
+      - "temp"
+    schedule:
+      interval: "daily"
+    allow:
+      - dependency-name: "@backstage/*"
+    open-pull-requests-limit: 15
+    

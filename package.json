@@ -1,0 +1,23 @@
+{
+  "name": "gh-dependabot-poc",
+  "version": "0.0.1",
+  "description": "testing dependabot & gh actions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mike Haley",
+  "license": "ISC",
+  "dependencies": {
+    "@backstage/plugin-techdocs": "^0.0.1",
+    "@backstage/plugin-catalog-graph": "^0.0.1"
+  },
+  "devDependencies": {
+    "@backstage/cli": "^0.5.1",
+    "@spotify/prettier-config": "^12.0.0",
+    "concurrently": "^6.0.0",
+    "lerna": "^4.0.0",
+    "prettier": "^2.3.2",
+    "typescript": "~4.5.4"
+  }
+}
