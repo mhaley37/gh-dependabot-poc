@@ -3,26 +3,24 @@ name: Create PR for backstage.io
 on:
   pull_request_target:
     types: [opened]
+    branches: 
+      - 'main'
+    
 
 jobs:
   rectify-backstage-packages:
     runs-on: ubuntu-latest
-    #if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]' || github.actor == 'mhaley37'
+    if: ${{ github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]' || github.actor == 'mhaley37'}}
     steps:       
-      - run: echo "Base branch branch $GITHUB_REF named $GITHUB_REF_NAME"
-      - run: echo "This is the branch name for the PR, $GITHUB_BASE_REF"
-      - run: echo "Checking out $GITHUB_HEAD_REF branch"
-      - run: echo "Using yarn this time"
       - uses: actions/checkout@v2
         with:
-          ref: 'mike'
+          ref: github.head_ref
       - uses: actions/setup-node@v2
         with: 
           node-version: '16'
       - run: npx yarn install
       #- run: yarn global add backstage-cli
       #- run: yarn backstage-cli versions-bump
-      - run: ls
       - run: npx backstage-cli versions:bump
       #- uses: EndBug/add-and-commit@v8
       #  with: 
