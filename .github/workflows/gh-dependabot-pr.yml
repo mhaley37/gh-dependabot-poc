@@ -10,7 +10,7 @@ on:
 jobs:
   rectify-backstage-packages:
     runs-on: ubuntu-latest
-    if:  ${{(github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]' || github.actor == 'mhaley37')}}
+    if:  ${{ contains(github.event.pull_request.labels.*.name), 'backstage-bump') && (github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]' || github.actor == 'mhaley37')}}
     steps:       
       - uses: actions/checkout@v2
         with:
