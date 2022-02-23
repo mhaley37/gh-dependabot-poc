@@ -10,15 +10,28 @@ on:
 jobs:
   rectify-backstage-packages:
     runs-on: ubuntu-latest
+<<<<<<< HEAD
     if:  ${{github.event.label.name == 'backstage-bump' (github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]' || github.actor == 'mhaley37')}}
     steps:       
       - uses: actions/checkout@v2
         with:
           ref: ${{github.head_ref}}
+=======
+    if: ${{ github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]' || github.actor == 'mhaley37'}}
+    steps:       
+      - uses: actions/checkout@v2
+        with:
+          ref: github.head_ref
+>>>>>>> f03f3d7 (test)
       - uses: actions/setup-node@v2
         with: 
           node-version: '16'
       - run: npx yarn install
+<<<<<<< HEAD
+=======
+      #- run: yarn global add backstage-cli
+      #- run: yarn backstage-cli versions-bump
+>>>>>>> f03f3d7 (test)
       - run: npx backstage-cli versions:bump
       - run: |
           git config user.name github-actions
