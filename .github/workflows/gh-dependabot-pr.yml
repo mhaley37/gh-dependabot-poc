@@ -23,7 +23,7 @@ jobs:
       - name: update pull request
         uses: tzkhan/pr-update-action@v2
         with:
-          repo_token: ${{secrets.GITHUB_TOKEN}}
+          repo-token: ${{secrets.GITHUB_TOKEN}}
           head-branch-regex: ${{github.head_ref}}
           title-template: 'NEw tiTLE!'
       - name: Commit changes and push
