@@ -1,4 +1,4 @@
-name: Create PR for backstage.io
+name:  for backstage.io
 
 on:
   pull_request_target:
@@ -29,9 +29,10 @@ jobs:
         id: bump
         run: |
           echo 'CLI_OUTPUT<<EOF' >> $GITHUB_ENV
-          echo "### Output of \`backstage-cli versions:bump\` \'\'\'" >> $GITHUB_ENV
+          echo "Output of \`backstage-cli versions:bump\` \'\'\'" >> $GITHUB_ENV
           yarn backstage-cli versions:bump >> $GITHUB_ENV
-          echo ' \'\'\' EOF' >> $GITHUB_ENV
+          echo " '\'\'\' " >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
       - name: Update pull request
         uses: tzkhan/pr-update-action@v2
         with:
