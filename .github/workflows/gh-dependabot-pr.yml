@@ -8,6 +8,7 @@ on:
 
 env:
   COMMIT_MSG: "Updated dependencies from backstage-cli versions:bump"
+  PR_BODY_STUB: "THE FOLLOWING\nSHOULD BE DONE\nnow!\n"
 jobs:
   rectify-backstage-packages:
     runs-on: ubuntu-latest
@@ -28,7 +29,7 @@ jobs:
         id: bump
         run: |
           echo 'CLI_OUTPUT<<EOF' >> $GITHUB_ENV
-          echo "#Results of `backstage-cli versions:bump`" >> $GITHUB_ENV
+          echo "### Output of `backstage-cli versions:bump`" >> $GITHUB_ENV
           yarn backstage-cli versions:bump >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
@@ -39,7 +40,7 @@ jobs:
           head-branch-regex: ${{github.head_ref}}
           title-template: ${{ env.COMMIT_MSG}}
           title-update-action: replace
-          body-template: ${{ env.CLI_OUTPUT }}
+          body-template: "${{ env.PR_BODY_STUB}} ${{ env.CLI_OUTPUT }}"
           body-update-action: replace
       - name: Commit changes and push
         run: |
