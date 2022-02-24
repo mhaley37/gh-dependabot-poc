@@ -28,6 +28,7 @@ jobs:
         id: bump
         run: |
           echo 'CLI_OUTPUT<<EOF' >> $GITHUB_ENV
+          echo "#Results of `backstage-cli versions:bump`" >> $GITHUB_ENV
           yarn backstage-cli versions:bump >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
