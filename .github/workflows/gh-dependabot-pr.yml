@@ -21,15 +21,15 @@ jobs:
           node-version: '16'
       - run: npx yarn install
       - name: bump backstage package versions
-        id: steps
-        run: echo "::set-output name=TAG_NAME::$(backstage-cli versions:bump)"
+        id: bump
+        run: echo "::set-output name=OUT::$(npx backstage-cli versions:bump)"
       - name: update pull request
         uses: tzkhan/pr-update-action@v2
         with:
           repo-token: ${{secrets.GITHUB_TOKEN}}
           head-branch-regex: ${{github.head_ref}}
           title-template: ${{ env.COMMIT_MSG}}
-          body-template: ${{ steps.version.outputs.TAG_NAME  }}
+          body-template: ${{ bump.version.outputs.OUT  }}
       - name: Commit changes and push
         run: |
           git config user.name github-actions
