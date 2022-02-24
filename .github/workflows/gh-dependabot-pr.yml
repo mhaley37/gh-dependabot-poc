@@ -21,16 +21,17 @@ jobs:
           node-version: '16'
       - run: npx yarn install
       - name: bump backstage package versions
-        run: npx backstage-cli versions:bump
+        id: bump-backstage
+        run: echo "::set-output name=CMD_OUT::$(backstage-cli versions:bump)"
       - name: update pull request
         uses: tzkhan/pr-update-action@v2
         with:
           repo-token: ${{secrets.GITHUB_TOKEN}}
           head-branch-regex: ${{github.head_ref}}
           title-template: ${{ env.COMMIT_MSG}}
-          body-template: "PLACEHOLDER FOR OUTPUT FROM backstage output"
+          body-template: ${{ steps-bump-backstage.outputs.CMD_OUT}}
       - name: Commit changes and push
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add . && git commit -m ${{ env.COMMIT_MSG}} && git push
+          git add . && git commit -m "${{ env.COMMIT_MSG}}" && git push
