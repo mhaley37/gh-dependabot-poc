@@ -1,4 +1,5 @@
-# This workflow is meant to trigger on pull requests opened by Dependabot strictly for updating 
+# This workflow is meant to be triggered on pull requests opened via Dependabot, specifically those opened for outdated backstage packages.  This is determined by looking for the
+# "backstage-bump" tag on pull requests.
 name:  for backstage.io
 
 on:
@@ -31,7 +32,9 @@ jobs:
         run: |
           echo 'CLI_OUTPUT<<EOF' >> $GITHUB_ENV
           echo "Output of \`backstage-cli versions:bump" >> $GITHUB_ENV
+          echo "begin" >> $GITHUB_ENV
           yarn backstage-cli versions:bump >> $GITHUB_ENV
+          echo "end" >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
       - name: Update pull request
         uses: tzkhan/pr-update-action@v2
