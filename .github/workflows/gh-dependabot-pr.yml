@@ -21,16 +21,16 @@ jobs:
         with:   
           node-version: '16'
       - run: npx yarn install
-      - name: bump backstage package versions
+      - name: Update backstage packages
         id: bump
         run: |
-          CHANGELOG="$(npx backstage-cli versions:bump)",
+          CHANGELOG="$(npx backstage-cli versions:bump)"
           CHANGELOG="$($CHANGELOG//'%'/'%25')"
           CHANGELOG="$($CHANGELOG//$'\n'/'%0A')" 
           CHANGELOG="$($CHANGELOG//$'\r'/'%0D')"
           echo "::set-output name=CLI_OUT::$CHANGELOG"
 
-      - name: update pull request
+      - name: Update pull request
         uses: tzkhan/pr-update-action@v2
         with:
           repo-token: ${{secrets.GITHUB_TOKEN}}
