@@ -32,9 +32,9 @@ jobs:
         run: |
           echo 'CLI_OUTPUT<<EOF' >> $GITHUB_ENV
           echo "Output of \`backstage-cli versions:bump" >> $GITHUB_ENV
-          echo "begin" >> $GITHUB_ENV
+          echo "\`\`\`" >> $GITHUB_ENV
           yarn backstage-cli versions:bump >> $GITHUB_ENV
-          echo "end" >> $GITHUB_ENV
+          echo "\`\`\`" >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
       - name: Update pull request
         uses: tzkhan/pr-update-action@v2
