@@ -8,7 +8,6 @@ on:
 
 env:
   COMMIT_MSG: "Updated dependencies from backstage-cli versions:bump"
-  REPORT: "NONE"
 jobs:
   rectify-backstage-packages:
     runs-on: ubuntu-latest
@@ -30,10 +29,11 @@ jobs:
         run: 
         # This may need to be called with yarn.  Also, better to find way to capture full output
         #echo "::set-output name=CLI_OUT::$(yarn backstage-cli versions:bump)"
-          REPORT="$(yarn backstage-cli versions:bump)"
-          REPORT="${REPORT//'%'/'%25'}"
-          REPORT="${REPORT//$'\n'/'%0A'}"
-          REPORT="${REPORT//$'\r'/'%0D'}"
+          echo 'CLI_OUTPUT<<EOF' >> $GITHUB_ENV
+          yarn backstage-cli versions:bump >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+          echo $GITHUB_ENV
+
       - name: Update pull request
         uses: tzkhan/pr-update-action@v2
         with:
@@ -41,11 +41,10 @@ jobs:
           head-branch-regex: ${{github.head_ref}}
           title-template: ${{ env.COMMIT_MSG}}
           title-update-action: replace
-          body-template: ${{ env.REPORT }}
+          body-template: ${{ env.CLI_OUTPUT }}
           body-update-action: replace
       - name: Commit changes and push
         run: |
-          echo "here are my commands: ${env.REPORT}"
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add . && git commit -m "${{ env.COMMIT_MSG}}" && git push
