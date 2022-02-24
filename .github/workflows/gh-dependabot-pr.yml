@@ -1,5 +1,8 @@
 # This workflow is meant to be triggered on pull requests opened via Dependabot, specifically those opened for outdated backstage packages.  This is determined by looking for the
-# "backstage-bump" tag on pull requests.
+# "backstage-bump" tag on pull requests.  This process does the following:
+#   - run backstage-client update process to update package.json
+#   - commits those changes to the PR branch
+#   - updates the title and description of the pull request
 name:  for backstage.io
 
 on:
@@ -30,7 +33,7 @@ jobs:
       - name: Update backstage packages
         id: bump
         run: |
-          echo 'CLI_OUTPUT<<EOF' >> $GITHUB_ENV
+          echo 'BUMP_CLI_OUTPUT<<EOF' >> $GITHUB_ENV
           echo "Output of \`backstage-cli versions:bump" >> $GITHUB_ENV
           echo "\`\`\`" >> $GITHUB_ENV
           yarn backstage-cli versions:bump >> $GITHUB_ENV
@@ -43,7 +46,7 @@ jobs:
           head-branch-regex: ${{github.head_ref}}
           title-template: ${{ env.COMMIT_MSG}}
           title-update-action: replace
-          body-template: "${{ env.PR_BODY_STUB}} ${{ env.CLI_OUTPUT }}"
+          body-template: "${{ env.PR_BODY_STUB}} ${{ env.BUMP_CLI_OUTPUT }}"
           body-update-action: replace
       - name: Commit changes and push
         run: |
