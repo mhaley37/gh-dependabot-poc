@@ -16,21 +16,20 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: ${{github.head_ref}}
-          submodules: recursive
       - uses: actions/setup-node@v2
         with:   
           node-version: '16'
       - run: npx yarn install
       - name: bump backstage package versions
         id: bump
-        run: echo "::set-output name=OUTPUT::$(npx backstage-cli versions:bump)"
+        run: echo "::set-output name=TAG_NAME::$(backstage-cli versions:bump)"
       - name: update pull request
         uses: tzkhan/pr-update-action@v2
         with:
           repo-token: ${{secrets.GITHUB_TOKEN}}
           head-branch-regex: ${{github.head_ref}}
           title-template: ${{ env.COMMIT_MSG}}
-          body-template: ${{ bump.version.outputs.OUTPUT  }}
+          body-template: ${{ bump.version.outputs.TAG_NAME  }}
       - name: Commit changes and push
         run: |
           git config user.name github-actions
