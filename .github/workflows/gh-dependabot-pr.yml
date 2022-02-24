@@ -8,7 +8,7 @@ on:
 
 env:
   COMMIT_MSG: "Updated dependencies from backstage-cli versions:bump"
-  PR_BODY_STUB: "THE FOLLOWING\nSHOULD BE DONE\nnow!\n"
+  PR_BODY_STUB: "## One or more backstage packages are outdated.  This pull request stages the necessary updates as determined by the (backstage update)[https://backstage.io/docs/getting-started/keeping-backstage-updated] utility"
 jobs:
   rectify-backstage-packages:
     runs-on: ubuntu-latest
@@ -29,7 +29,7 @@ jobs:
         id: bump
         run: |
           echo 'CLI_OUTPUT<<EOF' >> $GITHUB_ENV
-          echo "### Output of `backstage-cli versions:bump`" >> $GITHUB_ENV
+          echo "### Output of \`backstage-cli versions:bump\`" >> $GITHUB_ENV
           yarn backstage-cli versions:bump >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
