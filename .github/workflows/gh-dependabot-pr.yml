@@ -23,13 +23,8 @@ jobs:
       - run: npx yarn install
       - name: Update backstage packages
         id: bump
-        run: |
-          CHANGELOG="$(npx backstage-cli versions:bump)"
-          CHANGELOG="$($CHANGELOG//'%'/'%25')"
-          CHANGELOG="$($CHANGELOG//$'\n'/'%0A')" 
-          CHANGELOG="$($CHANGELOG//$'\r'/'%0D')"
-          echo "::set-output name=CLI_OUT::$CHANGELOG"
-
+        run: 
+          echo "::set-output name=CLI_OUT::$(npx backstage-cli versions:bump)"
       - name: Update pull request
         uses: tzkhan/pr-update-action@v2
         with:
