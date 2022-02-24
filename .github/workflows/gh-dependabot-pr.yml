@@ -5,7 +5,9 @@ on:
     types: [opened, reopened]
     branches: 
       - 'main'
-    
+
+env:
+  COMMIT_MSG: "Updated dependencies from backstage-cli versions:bump"  
 jobs:
   rectify-backstage-packages:
     runs-on: ubuntu-latest
@@ -25,9 +27,10 @@ jobs:
         with:
           repo-token: ${{secrets.GITHUB_TOKEN}}
           head-branch-regex: ${{github.head_ref}}
-          title-template: 'NEw tiTLE!'
+          title-template: ${{ env.COMMIT_MSG}}
+          body-template: "PLACEHOLDER FOR OUTPUT FROM backstage output"
       - name: Commit changes and push
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add . && git commit -m "Updated dependencies from backstage-cli versions:bump" && git push
+          git add . && git commit -m ${{ env.COMMIT_MSG}} && git push
