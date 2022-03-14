@@ -1,0 +1,21 @@
+# runs code-quality checks, translates typescript & run tests
+name: run-ci-actions
+
+on:
+  push:
+    branches: [ main ]
+  pull_request_target:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{github.head.ref}} 
+      - run: yarn install
+        name: Install dependencies
+      - run: yarn test
+        name: Run tests
