@@ -14,8 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{github.head.ref}} 
-      - run: yarn install
-        name: Install dependencies
+          ref: ${{github.head.ref}}
       - run: yarn test
         name: Run tests
