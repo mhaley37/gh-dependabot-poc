@@ -1,5 +1,5 @@
 # runs code-quality checks, translates typescript & run tests
-name: run-ci-actions
+name: run-ci-actions2
 
 on:
   push:
