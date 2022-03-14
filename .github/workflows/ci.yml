@@ -1,0 +1,19 @@
+# runs code-quality checks, translates typescript & run tests
+name: run-ci-actions2
+
+on:
+  push:
+    # branches: [ main ]
+  pull_request_target:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{github.head_ref}}
+      - run: echo "ENV- $GITHUB_HEAD_REF"
+      - run: echo "ENV- $GITHUB_REF"
