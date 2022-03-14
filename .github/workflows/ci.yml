@@ -3,7 +3,7 @@ name: run-ci-actions
 
 on:
   push:
-    branches: [ main ]
+    # branches: [ main ]
   pull_request_target:
     branches: [ main ]
   workflow_dispatch:
@@ -14,7 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{github.head.ref}}
-      - run: echo ${{github.read.ref}}    
-      - run: yarn test
-        name: Run tests
+          ref: ${{github.head_ref}}
+      - run: echo "ENV- $GITHUB_HEAD_REF"
+      - run: echo "ENV- $GITHUB_REF"
